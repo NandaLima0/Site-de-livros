@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria Online - Início</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #2d2f48;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        .navbar {
+            background-color: #2f6c81;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+        .navbar ul li {
+            display: inline;
+        }
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar ul li a:hover {
+            background-color: #417b97;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        .hero {
+            background-color: #42b3a9;
+            padding: 100px 20px 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+            background-image: url('path_to_hero_image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .hero button {
+            background-color: #079e6f;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .hero button:hover {
+            background-color: #09bbb4;
+        }
+        .featured {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .featured h2 {
+            margin-bottom: 30px;
+        }
+        .featured .book-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .book-list .book {
+            background-color: #2f6c81;
+            color: #ffffff;
+            padding: 20px;
+            width: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .book-list .book:hover {
+            transform: translateY(-5px);
+        }
+        .book-list .book a {
+            color: #98e0c5;
+            text-decoration: none;
+        }
+        .search-bar {
+            padding: 30px 20px;
+            background-color: #42b3a9;
+            text-align: center;
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            border-radius: 5px;
+            border: 2px solid #079e6f;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #079e6f;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #09bbb4;
+        }
+        .lista {
+            padding: 50px 20px;
+            background-color: #2d2f48;
+            color: #ffffff;
+            text-align: center;
+        }
+        .lista h2 {
+            margin-bottom: 20px;
+        }
+        .lista input, .lista textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 2px solid #079e6f;
+        }
+        .lista button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #079e6f;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .lista button:hover {
+            background-color: #09bbb4;
+        }
+        .lista2 {
+            padding: 50px 20px;
+            background-color: #2f6c81;
+            color: #ffffff;
+            text-align: center;
+        }
+        .lista2 h2 {
+            margin-bottom: 20px;
+        }
+        .lista2 input, .lista2 textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 2px solid #079e6f;
+        }
+        .lista2 button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #079e6f;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .lista2 button:hover {
+            background-color: #09bbb4;
+        }
+        .comment {
+            padding: 50px 20px;
+            background-color: #079e6f;
+            color: #ffffff;
+            text-align: center;
+        }
+        .comment h2 {
+            margin-bottom: 20px;
+        }
+        .comment form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .comment input, .comment textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 2px solid #2d2f48;
+        }
+        .comment button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2d2f48;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .comment button:hover {
+            background-color: #09bbb4;
+        }
+        .comment {
+            padding: 50px 20px;
+            background-color: #079e6f;
+            color: #ffffff;
+            text-align: center;
+        }
+        .footer {
+            background-color: #2f6c81;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .featured .book-list {
+                flex-direction: column;
+            }
+            .navbar ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        <ul>
+            <li><a href="/livros">Livros</a></li>
+            <li><a href="/autores">Autores</a></li>
+            <li><a href="/cadastrar">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <h1>Descubra o Seu Próximo Livro Favorito</h1>
+        <p>Explore uma seleção incrível de livros recomendados especialmente para você!</p>
+        <button onclick="window.location.href='#explorar'">Descubra o Próximo Livro</button>
+    </div>
+
+    <div class="featured" id="explorar">
+        <h2>Livros em Destaque</h2>
+        <div class="book-list">
+            <div class="book">
+                <h3>Nos Limites do Mar Sombrio da Escuridão</h3>
+                <a href="/livros">Saiba mais</a>
+            </div>
+            <div class="book">
+                <h3>Amêndoas</h3>
+                <a href="/livros">Saiba mais</a>
+            </div>
+            <div class="book">
+                <h3>O Horizonte Mora em Um Dia Cinza</h3>
+                <a href="/livros">Saiba mais</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="lista">
+        <h1>Lista dos Seus Livros Favoritos</h1>
+        <p>Veja a lista dos livros que você já curtiu.</p>
+        <button onclick="window.location.href='/livros-curtidos'">Ver Lista</button>
+    </div>
+
+    <div class="lista2">
+        <h1>Lista dos Seus Autores Curtidos</h1>
+        <p>Aqui está a lista dos autores que você curtiu.</p>
+        <button onclick="window.location.href='/autores-curtidos'">Ver Lista</button>
+    </div>
+
+    <div class="comment">
+        <h2>Comentário</h2>
+        <form method="POST" action="/">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+            <button type="submit">Enviar</button> 
+            <br>
+            <button onclick="window.location.href='/comentarios'">Comentários Feitos</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Livraria Online. Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>

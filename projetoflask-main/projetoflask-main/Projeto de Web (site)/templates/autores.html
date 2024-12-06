@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores - Livraria Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+       /* Conceito do Frontend */
+       body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #2d2f48;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Barra de Navegação */
+        .navbar {
+            background-color: #2f6c81;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+        .navbar ul li {
+            display: inline;
+        }
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar ul li a:hover {
+            background-color: #417b97;
+            border-radius: 5px;
+        }
+        /* Logo da Livraria */
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        /* Hero Section */
+        .hero {
+            background-color: #42b3a9;
+            padding: 100px 20px;
+            text-align: center;
+            margin-top: 60px;
+            background-image: url('/mnt/data/livros.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #98e0c5;
+        }
+
+        /* Seção de Autores */
+        .featured {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #ffffff;
+        }
+        .featured h2 {
+            font-family: 'Playfair Display', serif;
+            color: #2d2f48;
+            margin-bottom: 40px;
+        }
+        .book-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .book {
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        .book img {
+            max-width: 80%;
+            border-radius: 8px;
+        }
+        .book h3 {
+            text-align: left;
+            font-family: 'Playfair Display', serif;
+            color: #2f6c81;
+            margin-top: 20px;
+        }
+        .book h2 {
+            text-align: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #2d2f48;
+        }
+        .book p {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2d2f48;
+            margin-bottom: 15px;
+        }
+        .book:hover {
+            transform: translateY(-10px);
+        }
+        .curtirBtn {
+            background-color: #079e6f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .curtirBtn:hover {
+            background-color: #09bbb4;
+        }
+        .curtido {
+            background-color: #a20202;
+        }
+        .footer {
+            background-color: #2f6c81;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const curtirBtns = document.querySelectorAll('.curtirBtn'); 
+        
+            curtirBtns.forEach(curtirBtn => {
+                curtirBtn.addEventListener('click', () => {
+                    const autor = curtirBtn.getAttribute('data-autor'); 
+                    const statusCurtir = curtirBtn.nextElementSibling; 
+        
+                    fetch('/Autorcurtir', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ autor }) 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            if (data.curtido) {
+                                curtirBtn.classList.add('curtido');
+                                statusCurtir.textContent = "Você curtiu este autor.";
+                            } else {
+                                curtirBtn.classList.remove('curtido');
+                                statusCurtir.textContent = "Você não curtiu ainda.";
+                            }
+                        } else {
+                            alert(`Erro: ${data.message}`);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro na requisição:', error);
+                    });
+                });
+            });
+        });        
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/livros">Livros</a></li>
+            <li><a href="/autores-curtidos">Curtidos</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <h1>Conheça os Autores</h1>
+        <p>Descubra as histórias por trás dos livros e conheça seus criadores.</p>
+    </div>
+
+    <div class="featured">
+        <h2>Autores em Destaque</h2>
+        <div class="book-list">
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Peterson.jpg') }}" alt="Foto do Peterson">
+                <h2>Andrew Peterson</h2>
+                <p>Autor da saga Wingfeather.</p>
+                <h3>Biografia do Autor</h3>
+                <p>ANDREW PETERSON é cantor e compositor aclamado pela crítica e pelo público, além de ser o autor da premiada Saga Wingfeather. É também o fundador da Rabbit Room, uma organização que nutre comunidades por meio de histórias, arte e música. Ele e sua esposa, Jamie, têm três filhos e vivem em Nashville, nos EUA.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+                
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Won-pyung.jpeg') }}" alt="Foto da Won-pyung">
+                <h2>Sohn Won-pyung</h2>
+                <p>Autora de Amêndoas.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Sohn Won-pyung é uma premiada realizadora, guionista e romancista sul-coreana. Formada em Ciências Sociais, Filosofia e Realização de Cinema, recebeu diversos prêmios por seu romance de estreia, Amêndoas. Seu trabalho tem sido traduzido em várias línguas, e ela continua atuando na indústria cinematográfica.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Tati.jpg') }}" alt="Foto da Tati">
+                <h2>Tatielle Katluryn</h2>
+                <p>Autora de O Horizonte Mora em Um Dia Cinza.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Tatielle Katluryn nasceu no interior do Maranhão. É formada em Psicologia pela Universidade Federal do Delta do Parnaíba. Apaixonada por Jesus e pelos dramas coreanos, decidiu unir suas duas paixões e escrever histórias edificantes relacionadas à cultura asiática. É autora da duologia Yarin Davies e de Como um dia sem fim.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button> 
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Thays.jpg') }}" alt="Foto da Thays">
+                <h2>Thays Martinez</h2>
+                <p>Autora de Minha vida com Boris.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Thays Martinez, advogada e especialista em direito penal e marketing, é deficiente visual desde os quatro anos. Ela é Co-Criadora do Programa de Gestão da Diversidade, fundadora do Instituto IRIS e atua como consultora e palestrante em inclusão e acessibilidade. É autora do livro "Minha vida com Boris" e idealizadora do projeto “Heróis à Vista”.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Camila.jpeg') }}" alt="Foto da Camila">
+                <h2>Camila Antunes</h2>
+                <p>Autora de Deixa Nevar.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Camila Antunes, autora brasileira, iniciou sua carreira em 2015 com o romance premiado Lumen. Desde então, tem tido sucesso como autora independente. Seu mais recente livro, Deixa Nevar, é uma história romântica com surpresas e reviravoltas. Ela mora na Região dos Lagos, Rio de Janeiro, com sua família.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Bo-Reum.jpeg') }}" alt="Foto da Bo-Reum">
+                <h2>Hwang Bo-Reum</h2>
+                <p>Autora de Bem-vindos à Livraria Hyunam-dong.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Hwang Bo-reum é formada em ciência da computação e ex-engenheira de software na LG Electronics, lançou seu primeiro romance, Bem-vindos à Livraria Hyunam-dong. O livro virou um fenômeno, vendendo 250 mil cópias na Coreia do Sul em um ano e com direitos adquiridos em mais de vinte países.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Stephen.jpg') }}" alt="Foto do Stephen">
+                <h2>Stephen Chbosky</h2>
+                <p>Autor de Vantagens De Ser Incrivel.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Stephen Chbosky é um romancista, argumentista e realizador de cinema, famoso principalmente por "As Vantagens de Ser Invisível", que também adaptou para o cinema. Ele escreveu os roteiros de "Rent" e da versão de 2017 de "A Bela e o Monstro", além de co-criar, escrever e produzir a série de TV "Jericho", exibida na CBS de 2006 a 2008.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Arlene.png') }}" alt="Foto da Arlene">
+                <h2>Arlene Diniz</h2>
+                <p>Autora de No Final Daquele Dia.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Arlene Diniz tem 27 anos, é escritora cristã e educadora. Mora em Paraty, Rio de Janeiro, com a família e é ativa na Igreja Presbiteriana de Mambucaba. Publicou os livros “Uma Viagem Nem Um Pouco Sonhada” e “No Final Daquele Dia”, além de ter participado de antologias e colaborado em contos cristãos.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Miller.jpg') }}" alt="Foto da Miller">
+                <h2>Lauren Miller</h2>
+                <p>Autora de Paralela.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Lauren Miller cresceu em Atlanta, Estados Unidos. Escreveu seu livro de estreia, Paralela (Pavana, 2015), durante a licença maternidade, experiência que dividiu com o mundo em seu blog Embracing the Detour. Agora vive com o marido e os dois filhos em Los Angeles. Quando escolheram por mim é seu segundo romance.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+
+            <div class="book">
+                <img src="{{ url_for('static', filename='images/Jennifer.jpg') }}" alt="Foto da Jennifer">
+                <h2>Jennifer E. Smith</h2>
+                <p>Autora de A Probabilidade Estatística Do Amor à Primeira Vista.</p>
+                <h3>Biografia do Autor</h3>
+                <p>Jennifer E. Smith é autora de nove livros, que já foram traduzidos para 33 idiomas, e dois deles ganharam adaptações para o cinema. Ela tem mestrado em escrita criativa pela Universidade de St. Andrews, na Escócia, e atualmente mora em Los Angeles.</p>
+                <button id="curtirBtn" class="curtirBtn" data-autor="Andrew Peterson">
+                    <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                    Curtir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Livraria Online. Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>

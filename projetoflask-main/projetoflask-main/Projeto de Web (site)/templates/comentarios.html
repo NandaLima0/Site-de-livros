@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros Curtidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #2d2f48;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .navbar {
+            background-color: #2f6c81;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+        .navbar ul li {
+            display: inline;
+        }
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar ul li a:hover {
+            background-color: #417b97;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        .comentarios {
+            margin: 100px auto;
+            padding: 20px;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .comentarios ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .comentarios li {
+            font-size: 18px;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .comentarios li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/livros">Livros</a></li>
+            <li><a href="/autores">Autores</a></li>
+        </ul>
+    </div>
+
+    <div class="comentarios">
+        <h1>Comentários Recebidos</h1>
+        {% if comentarios %}
+        <ul>
+            {% for comentario in comentarios %}
+            <li>
+                <strong>{{ comentario['nome'] }}</strong>: {{ comentario['mensagem'] }}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Nenhum comentário feito.</p>
+        {% endif %}
+    </div>

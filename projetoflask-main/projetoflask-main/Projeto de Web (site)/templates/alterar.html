@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria Online - Alterar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos globais */
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            margin: 0; 
+            background-color: #f0f0f0; 
+            color: #2d2f48; 
+        }
+        h1 { 
+            font-family: 'Playfair Display', serif; 
+        }
+        .navbar { 
+            background-color: #2f6c81; 
+            padding: 15px; 
+            position: fixed; 
+            width: 100%; top: 0; 
+            display: flex; 
+            align-items: center; 
+        }
+        .navbar ul { 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            flex-grow: 1; 
+            justify-content: space-around; 
+        }
+        .navbar ul li a { 
+            color: #fff; 
+            text-decoration: none; 
+            padding: 10px 20px; 
+            font-weight: bold; 
+        }
+        .navbar ul li a:hover { 
+            background-color: #417b97; 
+            border-radius: 5px; 
+        }
+        .logo { 
+            width: 60px; 
+        }
+        .form-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin-top: 80px; /* Distância maior entre a navbar e o formulário */
+        }
+        .form-section { 
+            background-color: #fff; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            width: 400px; 
+        }
+        label { 
+            font-weight: bold; 
+            display: block; 
+            margin-top: 10px; 
+        }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        }
+        button { 
+            width: 100%; 
+            padding: 10px; 
+            background-color: #2f6c81; 
+            color: #fff; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background-color: #417b97; 
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        </a>
+        <ul>
+            <li><a href="/cadastrar">Cadastrar</a></li>
+            <li><a href="/alterar">Alterar</a></li>
+            <li><a href="/deletar">Deletar</a></li>
+        </ul>
+    </div>
+    <div class="form-container">
+        <div class="form-section">
+            <h1>Alterar Informações</h1>
+            <form action="/alterar" method="POST">
+                <label for="email">Email:</label>
+                <input type="email" name="email" placeholder="Digite seu email">
+        
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+        
+                <label for="novo_nome">Novo Nome:</label>
+                <input type="text" id="novo_nome" name="novo_nome" placeholder="Atualize seu nome">
+        
+                <label for="nova_senha">Nova Senha:</label>
+                <input type="password" id="nova_senha" name="nova_senha" placeholder="Digite uma nova senha">
+        
+                <button type="submit">Alterar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

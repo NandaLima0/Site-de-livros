@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha vida com Boris - Detalhes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #2d2f48;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        .navbar {
+            background-color: #2f6c81;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+        .navbar ul li {
+            display: inline;
+        }
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar ul li a:hover {
+            background-color: #417b97;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        .livros-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 100px 20px 50px 20px;
+        }
+        .detalhes-livro {
+            background-color: #ffffff;
+            width: 90%;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .detalhes-livro img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .detalhes-livro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #2d2f48;
+        }
+        .detalhes-livro p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .detalhes-livro h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2f6c81;
+            margin-top: 20px;
+        }
+        .detalhes-livro ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .detalhes-livro ul li a {
+            display: inline-block;
+            background-color: #079e6f;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .detalhes-livro ul li a:hover {
+            background-color: #09bbb4;
+        }
+        .curtirBtn {
+            background-color: #079e6f;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .curtirBtn:hover {
+            background-color: #09bbb4;
+        }
+        .curtido {
+            background-color: #a20202;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2f6c81;
+            color: #ffffff;
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const curtirBtn = document.getElementById('curtirBtn');
+            const statusCurtir = document.getElementById('statusCurtir');
+    
+            curtirBtn.addEventListener('click', () => {
+                const livro = "O Horizonte Mora em Um Dia Cinza";
+    
+                fetch('/Livrocurtir', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ livro })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.curtido) {
+                            curtirBtn.classList.add('curtido');
+                            statusCurtir.textContent = "Você curtiu este livro.";
+                        } else {
+                            curtirBtn.classList.remove('curtido');
+                            statusCurtir.textContent = "Você não curtiu ainda.";
+                        }
+                    } else {
+                        alert(`Erro: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/livros">Livros</a></li>
+            <li><a href="/autores">Autores</a></li>
+        </ul>
+    </div>
+
+    <div class="livros-container">
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/horizonte.jpg') }}" alt="Capa do Livro O Horizonte Mora em Um Dia Cinza">
+            <h2>O Horizonte Mora em Um Dia Cinza</h2>
+            <p><strong>Autor:</strong> Tatielle Katluryn</p>
+            <p><strong>Sinopse:</strong> Uma bela história sobre como o amor pode surgir nos momentos mais inesperados, com uma ambientação moderna e envolvente.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Tatielle Katluryn é uma escritora brasileira conhecida por seus romances envolventes que capturam a essência das relações humanas.</p>
+            <h3>Onde Encontrar</h3>
+            <ul>
+                <li><a href="https://www.amazon.com.br">Compre na Loja</a></li>
+            </ul>
+            <button id="curtirBtn" class="curtirBtn">
+                <img src="{{ url_for('static', filename='images/fav.png') }}" alt="Favoritar" style="width: 16px; height: 16px; vertical-align: middle;">
+                Curtir
+            </button>
+            <p id="statusCurtir">Você não curtiu ainda.</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Livraria Online</p>
+    </footer>
+</body>
+</html>

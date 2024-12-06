@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #2d2f48;
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        .navbar {
+            background-color: #2f6c81;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+        .navbar ul li {
+            display: inline;
+        }
+        .navbar ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .navbar ul li a:hover {
+            background-color: #417b97;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 60px;
+            height: auto;
+        }
+        /* Hero Section */
+        .hero {
+            background-color: #42b3a9;
+            padding: 100px 20px 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+            background-image: url('path_to_hero_image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .hero button {
+            background-color: #079e6f;
+            color: #ffffff;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .hero button:hover {
+            background-color: #09bbb4;
+        }
+        .featured {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .livros-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 5px 20px 50px 20px;
+        }
+        .detalhes-livro {
+            background-color: #ffffff;
+            width: 45%;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .detalhes-livro img {
+            max-width: 1000px;
+            border-radius: 8px;
+        }
+        .detalhes-livro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #2d2f48;
+        }
+        .detalhes-livro p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .detalhes-livro h3 {
+            font-family: 'Playfair Display', serif;
+            color: #2f6c81;
+            margin-top: 20px;
+        }
+        .detalhes-livro ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .detalhes-livro ul li a {
+            display: inline-block;
+            background-color: #079e6f;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .detalhes-livro ul li a:hover {
+            background-color: #09bbb4;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2f6c81;
+            color: #ffffff;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo da Livraria" class="logo">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/autores">Autores</a></li>
+            <li><a href="/livros-curtidos">Curtidos</a></li>
+        </ul>
+    </div>
+    <div class="hero">
+        <h1>Descubra As melhores Perolas Escondidas</h1>
+        <p>Encontre o Seu Próximo Livro Favorito Aqui!</p>
+    </div>
+
+    <div class="featured">
+        <h2>Todos os Livros</h2>
+    </div>
+
+    <div class="livros-container">
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/boris.jpg') }}" alt="Capa do Livro Minha vida com Boris">
+            <h2>Minha vida com Boris: A comovente história do cão que mudou a vida de sua dona e do Brasil</h2>
+            <p><strong>Autor:</strong> Thays Martinez</p>
+            <p><strong>Sinopse:</strong> Este livro conta a história da advogada Thays Martinez e do cão-guia Boris, e como a sua convivência transformou-se em uma amizade profunda e inspiradora.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Thays Martinez é uma autora brasileira renomada por suas histórias envolventes e educativas voltadas para o público infantil e juvenil.</p>
+            <ul>
+                <li><a href="/minha-vida-com-boris">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/Wingfeather.jpg') }}" alt="Capa do Livro A Saga Wingfeather">
+            <h2>Nos Limites do Mar Sombrio da Escuridão - A Saga Wingfeather</h2>
+            <p><strong>Autor:</strong> Andrew Peterson</p>
+            <p><strong>Sinopse:</strong> Este é o primeiro volume da saga Wingfeather, uma emocionante jornada de aventuras em um mundo cheio de perigos e criaturas estranhas.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Andrew Peterson é um autor renomado, conhecido por suas obras de fantasia e ficção cristã.</p>
+            <ul>
+                <li><a href="/a-saga-wingfeather">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/amendoas.jpg') }}" alt="Capa do Livro Amêndoas">
+            <h2>Amêndoas</h2>
+            <p><strong>Autor:</strong> Won-pyung Sohn</p>
+            <p><strong>Sinopse:</strong> Um romance tocante sobre um jovem que navega por suas dificuldades emocionais em um mundo onde ele não se encaixa totalmente.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Won-pyung Sohn é um autor sul-coreano, amplamente celebrado por sua obra Amêndoas, que explora temas de empatia e identidade.</p>
+            <ul>
+                <li><a href="/amendoas">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/horizonte.jpg') }}" alt="Capa do Livro O Horizonte Mora em Um Dia Cinza">
+            <h2>O Horizonte Mora em Um Dia Cinza</h2>
+            <p><strong>Autor:</strong> Tatielle Katluryn</p>
+            <p><strong>Sinopse:</strong> Uma bela história sobre como o amor pode surgir nos momentos mais inesperados, com uma ambientação moderna e envolvente.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Tatielle Katluryn é uma escritora brasileira conhecida por seus romances envolventes que capturam a essência das relações humanas.</p>
+            <ul>
+                <li><a href="/o-horizonte-mora-em-um-dia-cinza">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/deixa nevar.jpg') }}" alt="Capa do Livro Deixa Nevar">
+            <h2>Deixa Nevar</h2>
+            <p><strong>Autor:</strong> Camila Antunes</p>
+            <p><strong>Sinopse:</strong> Uma história romântica ambientada no clima tropical que traz surpresas inesperadas e reviravoltas entre os personagens principais.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Camila Antunes é uma autora brasileira, conhecida por criar histórias envolventes e emocionantes.</p>
+            <ul>
+                <li><a href="/deixa-nevar">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/livraria Hyunam-dong.jpg') }}" alt="Capa do Livro Bem-vindos à Livraria Hyunam-dong">
+            <h2>Bem-vindos à Livraria Hyunam-dong</h2>
+            <p><strong>Autor:</strong> Hwang Bo-Reum</p>
+            <p><strong>Sinopse:</strong> Uma charmosa história sobre uma pequena livraria na Coréia do Sul e as pessoas que nela encontram um refúgio.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Hwang Bo-Reum é uma autora sul-coreana, famosa por capturar a vida cotidiana de maneira poética e nostálgica.</p>
+            <ul>
+                <li><a href="/livraria-hyunam-dong">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/no final dql dia.jpg') }}" alt="Capa do Livro No Final Daquele Dia">
+            <h2>No Final Daquele Dia</h2>
+            <p><strong>Autor:</strong> Arlene Diniz</p>
+            <p><strong>Sinopse:</strong> Uma história sobre amizades, amores e encontros inesperados em uma bela tarde de verão na praia.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Arlene Diniz é uma escritora brasileira que retrata com emoção e leveza as relações humanas.</p>
+            <ul>
+                <li><a href="/no-final-daquele-dia">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/vantagens.jpg') }}" alt="Capa do Livro vantagens de ser incrivel">
+            <h2>Vantagens De Ser Incrivel</h2>
+            <p><strong>Autor:</strong> Stephen Chbosky</p>
+            <p><strong>Sinopse:</strong> Um livro conta a história de Charlie, um adolescente de 15 anos que está entrando no ensino médio. A trama é composta por cartas fictícias que Charlie escreve para um amigo anônimo.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Stephen Chbosky é um escritor e diretor americano que explora temas de adolescência e saúde mental, e é conhecido por adaptar suas histórias para o cinema com sensibilidade.</p>
+            <ul>
+                <li><a href="/vantagens-de-ser-incrivel">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+    
+    
+    
+    
+    
+    
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/paralela.jpg') }}" alt="Capa do Livro Paralela">
+            <h2>Paralela</h2>
+            <p><strong>Autor:</strong> Lauren Miller</p>
+            <p><strong>Sinopse:</strong> Um livro que explora realidades paralelas e como as escolhas podem influenciar nossa vida de formas inesperadas.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Lauren Miller é uma autora de ficção conhecida por suas narrativas intrigantes e cheias de mistério.</p>
+            <ul>
+                <li><a href="/paralela">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+
+
+
+
+
+        <section class="detalhes-livro">
+            <img src="{{ url_for('static', filename='images/Amor.jpg') }}" alt="Capa do Livro Amor a primeira vista">
+            <h2>A Probabilidade Estatística Do Amor à Primeira Vista</h2>
+            <p><strong>Autor:</strong> Jennifer E. Smith</p>
+            <p><strong>Sinopse:</strong> No livro Hadley conhece Oliver no aeroporto após perder seu voo. Em 24 horas, eles se conectam e descobrem que o amor pode surgir nos momentos mais inesperados.</p>
+            <h3>Sobre o Autor</h3>
+            <p>Jennifer E. Smith é autora de nove livros, dois adaptados para o cinema, com obras traduzidas para 33 idiomas. Ela tem mestrado em escrita criativa e mora em Los Angeles.</p>
+            <ul>
+                <li><a href="/amor-a-primeira-vista">Detalhes do Livro</a></li>
+            </ul>
+        </section>
+
+
+
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Livraria Online</p>
+    </footer>
+</body>
+</html>
